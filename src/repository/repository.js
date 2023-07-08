@@ -149,3 +149,85 @@ export function getDataWithWhereAndCollection(collectionName, fieldName, operato
     });
   }
   
+
+  //scrittura di intere collezioni:
+  /*
+useEffect(() => {
+  leggiDati();
+}, []);
+
+const leggiDati = () => {
+  const ristoranti = [
+    {
+      nome: "Ristorante 1",
+      via: "Via Ristorante 1",
+      tipologiaCibo: ["pizza"],
+      aperto: true
+    },
+    {
+      nome: "Ristorante 2",
+      via: "Via Ristorante 2",
+      tipologiaCibo: ["panini"],
+      aperto: false
+    },
+    {
+      nome: "Ristorante 3",
+      via: "Via Ristorante 3",
+      tipologiaCibo: ["pizza", "panini"],
+      aperto: true
+    }
+  ];
+  
+  // Aggiungi i ristoranti a Firebase Firestore
+  ristoranti.forEach((ristorante) => {
+    firebase.firestore().collection("ristoranti").add(ristorante)
+      .then((docRef) => {
+        console.log("Ristorante aggiunto con ID:", docRef.id);
+      })
+      .catch((error) => {
+        console.error("Errore durante l'aggiunta del ristorante:", error);
+      });
+  });
+  
+};
+  */
+
+
+
+/*
+AGGIUNGERE PROPRIETA' A INTERA COLLEZIONE
+const collectionRef = firebase.firestore().collection('collectionName');
+
+collectionRef.get()
+  .then((querySnapshot) => {
+    const batch = firebase.firestore().batch();
+
+    querySnapshot.forEach((doc) => {
+      const docRef = collectionRef.doc(doc.id);
+      batch.update(docRef, { nuovaProprieta: 'valoreNuovaProprieta' });
+    });
+
+    return batch.commit();
+  })
+  .then(() => {
+    console.log('Nuova proprietà aggiunta con successo a tutti i documenti della collezione!');
+  })
+  .catch((error) => {
+    console.error('Errore nell\'aggiunta della nuova proprietà ai documenti della collezione:', error);
+  });
+
+*/
+
+/*
+AGGIUNGERE PROPRIETA' AD UN DOCUMENTO
+const docRef = firebase.firestore().collection('collectionName').doc('documentId');
+
+docRef.update({ nuovaProprieta: 'valoreNuovaProprieta' })
+  .then(() => {
+    console.log('Nuova proprietà aggiunta con successo al documento!');
+  })
+  .catch((error) => {
+    console.error('Errore nell\'aggiunta della nuova proprietà al documento:', error);
+  });
+
+*/
