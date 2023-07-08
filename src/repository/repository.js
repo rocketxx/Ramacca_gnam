@@ -58,6 +58,23 @@ export function WriteByCollectionAndId(collection, id, objectToUpload) {
         });
     });
   }
+
+  export function WriteByCollectionAndWhere(collection, fieldName, operator, value, objectToUpload) {
+    return new Promise((resolve, reject) => {
+      DB.collection(collection)
+        .where(fieldName, operator, value)
+        .set(objectToUpload)
+        .then(() => {
+          console.log("[A1] Documento caricato correttamente!");
+          resolve();
+        })
+        .catch((error) => {
+          console.error("[A1] Errore nella scrittura del documento: ", error);
+          reject(error);
+        });
+    });
+  }
+  
   
   export function getByCollectionAndId(collection, id) {
     return new Promise((resolve, reject) => {
@@ -112,3 +129,23 @@ export function getDataWithWhereAndCollection(collectionName, fieldName, operato
         });
     });
   }
+
+
+  export function ReadAllDocumentByCollection(collection) {
+    return new Promise((resolve, reject) => {
+      DB.collection(collection)
+        .get()
+        .then((querySnapshot) => {
+          const documents = [];
+          querySnapshot.forEach((doc) => {
+            documents.push(doc.data());
+          });
+          resolve(documents);
+        })
+        .catch((error) => {
+          console.error("Errore nella lettura dei documenti: ", error);
+          reject(error);
+        });
+    });
+  }
+  
