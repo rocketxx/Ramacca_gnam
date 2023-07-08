@@ -4,29 +4,46 @@ import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { firebase } from '../../modules/firebase';
 import { getUserInfo } from '../../util/auth';
-import { WriteByCollectionAndId, getByCollectionAndId } from '../../repository/repository';
+import { WriteByCollectionAndId, getByCollectionAndId, getByCollectionWithWhere, getDataWithWhereAndCollection } from '../../repository/repository';
 // import { getByCollectionAndId } from '../../repository/repository';
 
 
 function WelcomeAdminScreen() {
   const [userInfo, setUserInfo] = useState({})
-  useEffect(() => {
-    const func = async () => {
-      await getUserInfo().then((res) => {
-        setUserInfo(res)
-      })
-    }
-    func();
-  }, [])
+  // useEffect(() => {
+  //   const func = async () => {
+  //     await getUserInfo().then((res) => {
+  //       setUserInfo(res)
+  //     })
+  //   }
+  //   func();
+  // }, [])
 
 // useEffect(() => {
 //   const func = async () => {
-//       await getByCollectionAndId('courses','64RqlG8KhjK8GYuTWwjQ')?.then((doc)=>{
-//         // console.log(doc)
+//       await getByCollectionAndId('todos','LWmqBEQ7kGOLNdDK3SuR')?.then((doc)=>{
+//         console.log(doc)
 //       })
 //     }
 //     func();
 //   }, [])
+
+////lettura
+
+useEffect(() => {
+  leggiDati();
+}, []);
+
+const leggiDati = () => {
+  getDataWithWhereAndCollection("todos", "state", "==", "CA")
+    .then((results) => {
+      console.log(results)
+    })
+    .catch((error) => {
+      console.log("Errore nella lettura dei dati:", error);
+    });
+};
+
 
 //   useEffect(() => {
 //     const func = async () => {

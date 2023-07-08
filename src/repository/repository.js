@@ -1,4 +1,25 @@
 import { firebase } from './../modules/firebase';
+const DB = firebase.firestore();
+///////////////////////////////////////////////////////
+//puoi effettuare più di una di queste chiamate eseguendo:
+// useEffect(() => {
+//     funzione1();
+//     funzione2();
+//   }, []);
+
+//   const leggiDati = () => {
+//     funzione1()
+//       .then((results) => {
+//         console.log(results)
+//       })
+//       .catch((error) => {
+    //         console.log("Errore nella lettura dei dati:", error);
+    //       });
+    //   };
+
+    //dove funzione1() sarebbe una di quelle in questo file.
+///////////////////////////////////////////////////////
+
 
 //USAGE: set 
 // useEffect(() => {
@@ -22,28 +43,74 @@ import { firebase } from './../modules/firebase';
 //       func();
 //     }, [])
 
-export async function WriteByCollectionAndId(collection, id,objectToUpload) 
-{    
-  const fireApi = firebase.firestore().collection(collection).doc(id).set(objectToUpload)
-  .then(() => {
-    console.log("Document successfully written!");
-  })
-  .catch((error) => {
-    console.error("Error writing document: ", error);
-  });
-}
-    export async function getByCollectionAndId(collection, id) {
-
-    const fireApi = firebase.firestore().collection(collection).doc(id);
-    const data_ = await fireApi.get().then((doc) => {
-        if (doc.exists) {
-            // console.log("Document data:", doc.data());
-            return doc.data()
-        } else {
-            console.log("No such document!");
-        }
-    }).catch((error) => {
-        console.log("Error getting document:", error);
+export function WriteByCollectionAndId(collection, id, objectToUpload) {
+    return new Promise((resolve, reject) => {
+      firebase
+        .firestore()
+        .collection(collection)
+        .doc(id)
+        .set(objectToUpload)
+        .then(() => {
+          console.log("[A1] Documento caricato correttamente!");
+          resolve();
+        })
+        .catch((error) => {
+          console.error("[A1] Errore nella scrittura del documento: ", error);
+          reject(error);
+        });
     });
-    return data_ ? data_ : null;
+  }
+  
+  export function getByCollectionAndId(collection, id) {
+    return new Promise((resolve, reject) => {
+      const fireApi = firebase.firestore().collection(collection).doc(id);
+      fireApi
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            // console.log("Document data:", doc.data());
+            resolve(doc.data());
+          } else {
+            console.log("[B1] Nessun documento trovato");
+            resolve(null);
+          }
+        })
+        .catch((error) => {
+          console.log("[B1] Errore lettura documento: ", error);
+          reject(error);
+        });
+    });
+  }
+  
+
+//USAGE:
+// useEffect(() => {
+//     leggiDati();
+//   }, []);
+  
+//   const leggiDati = () => {
+//     getDataWithWhereAndCollection("todos", "state", "==", "CA")
+//       .then((results) => {
+//         console.log(results)
+//       })
+//       .catch((error) => {
+//         console.log("Errore nella lettura dei dati:", error);
+//       });
+//   };
+export function getDataWithWhereAndCollection(collectionName, fieldName, operator, value) {
+    return new Promise((resolve, reject) => {
+      DB.collection(collectionName)
+        .where(fieldName, operator, value)
+        .get()
+        .then((querySnapshot) => {
+          const results = [];
+          querySnapshot.forEach((doc) => {
+            results.push(doc.data());
+          });
+          resolve(results);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
   }
