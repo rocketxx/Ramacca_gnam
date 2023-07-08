@@ -7,6 +7,7 @@ const DB = firebase.firestore();
 //     funzione2();
 //   }, []);
 
+//dove funzione1() sarebbe una di quelle in questo file.
 //   const leggiDati = () => {
 //     funzione1()
 //       .then((results) => {
@@ -17,7 +18,6 @@ const DB = firebase.firestore();
     //       });
     //   };
 
-    //dove funzione1() sarebbe una di quelle in questo file.
 ///////////////////////////////////////////////////////
 
 
@@ -45,9 +45,7 @@ const DB = firebase.firestore();
 
 export function WriteByCollectionAndId(collection, id, objectToUpload) {
     return new Promise((resolve, reject) => {
-      firebase
-        .firestore()
-        .collection(collection)
+        DB.collection(collection)
         .doc(id)
         .set(objectToUpload)
         .then(() => {
@@ -63,7 +61,7 @@ export function WriteByCollectionAndId(collection, id, objectToUpload) {
   
   export function getByCollectionAndId(collection, id) {
     return new Promise((resolve, reject) => {
-      const fireApi = firebase.firestore().collection(collection).doc(id);
+      const fireApi = DB.collection(collection).doc(id);
       fireApi
         .get()
         .then((doc) => {
