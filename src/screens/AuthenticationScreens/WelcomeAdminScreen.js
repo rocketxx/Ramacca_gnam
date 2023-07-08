@@ -4,6 +4,9 @@ import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { firebase } from '../../modules/firebase';
 import { getUserInfo } from '../../util/auth';
+import { WriteByCollectionAndId, getByCollectionAndId } from '../../repository/repository';
+// import { getByCollectionAndId } from '../../repository/repository';
+
 
 function WelcomeAdminScreen() {
   const [userInfo, setUserInfo] = useState({})
@@ -15,21 +18,28 @@ function WelcomeAdminScreen() {
     }
     func();
   }, [])
-  // const user = firebase.auth().currentUser;
-  //scrittura
-  // firebase.auth().setc
-  // const todo2 = firebase.firestore().collection('todos').doc("LWmqBEQ7kGOLNdDK3SuR").set({
-  //   name: "Los Angeles",
-  //   state: "CA",
-  //   country: "USA"
-  // })
-  // .then(() => {
-  //   console.log("Document successfully written!");
-  // })
-  // .catch((error) => {
-  //   console.error("Error writing document: ", error);
-  // });
-  //
+
+// useEffect(() => {
+//   const func = async () => {
+//       await getByCollectionAndId('courses','64RqlG8KhjK8GYuTWwjQ')?.then((doc)=>{
+//         // console.log(doc)
+//       })
+//     }
+//     func();
+//   }, [])
+
+//   useEffect(() => {
+//     const func = async () => {
+//         await WriteByCollectionAndId('courses','LWmqBEQ7kGOLNdDK3SuR',{
+//           name: "Los Angeles",
+//           state: "CA",
+//           country: "USA"
+//         });
+//       }
+//       func();
+//     }, [])
+
+  
 
   return (
     <View style={styles.rootContainer}>
