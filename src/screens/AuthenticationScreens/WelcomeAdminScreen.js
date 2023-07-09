@@ -11,30 +11,16 @@ import { ReadAllDocumentByCollection, WriteByCollectionAndId, getByCollectionAnd
 function WelcomeAdminScreen() {
   const [userInfo, setUserInfo] = useState({})
 
-  // useEffect(() => {
-  //   const func = async () => {
-  //     await getUserInfo().then((res) => {
-  //       setUserInfo(res)
-  //     })
-  //   }
-  //   func();
-  // }, [])
-
-
-useEffect(() => {
-  leggiDati();
-}, []);
-
-  const leggiDati = () => {
-    ReadAllDocumentByCollection('ristoranti')
-      .then((results) => {
-        console.log(results)
+  useEffect(() => {
+    const func = async () => {
+      await getUserInfo().then((res) => {
+        setUserInfo(res)
       })
-      .catch((error) => {
-            console.log("Errore nella lettura dei dati:", error);
-          });
-      };
-  
+    }
+    func();
+  }, [])
+
+
 
   return (
     <View style={styles.rootContainer}>

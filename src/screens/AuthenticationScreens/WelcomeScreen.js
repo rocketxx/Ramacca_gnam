@@ -7,6 +7,7 @@ import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { firebase } from '../../modules/firebase'
 import { AuthContext } from "../../store/auth-contenxt";
 import { getUserInfo } from '../../util/auth';
+import { ReadAllDocumentByCollection, WriteByCollectionAndId, getByCollectionAndId, getByCollectionWithWhere, getDataWithWhereAndCollection } from '../../repository/repository';
 
 function WelcomeScreen() {
   const auth = getAuth()
@@ -21,6 +22,19 @@ function WelcomeScreen() {
     func();
   }, [])
 
+  useEffect(() => {
+    leggiDati();
+  }, []);
+  
+    const leggiDati = () => {
+      ReadAllDocumentByCollection('ristoranti')
+        .then((results) => {
+          console.log(results)
+        })
+        .catch((error) => {
+              console.log("Errore nella lettura dei dati:", error);
+            });
+        };
 
   ////lettura
   //   todo.get().then((doc) => {
