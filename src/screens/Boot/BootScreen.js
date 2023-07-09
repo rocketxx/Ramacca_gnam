@@ -14,8 +14,10 @@ import LoginScreen from '../AuthenticationScreens/LoginScreen';
 import SignupScreen from '../AuthenticationScreens/SignupScreen';
 import WelcomeAdminScreen from '../AuthenticationScreens/WelcomeAdminScreen';
 import WelcomeScreen from '../AuthenticationScreens/WelcomeScreen';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Stack = createNativeStackNavigator();
+const BottonTabs = createBottomTabNavigator();
 
 function AuthStack() {
     return (
@@ -35,22 +37,33 @@ function AuthStack() {
 function AuthenticatedStack() {
     const authCtx = useContext(AuthContext);
     return (
-        <Stack.Navigator
+        <BottonTabs.Navigator
             screenOptions={{
                 headerStyle: { backgroundColor: Colors.primary500 },
                 headerTintColor: 'white',
                 contentStyle: { backgroundColor: Colors.primary100 },
+                headerRight: ({tintColor}) =>{
+                    return (
+                    <IconButton 
+                      icon={'exit'} 
+                      size={24} 
+                      color={tintColor} 
+                      onPress={authCtx.logout}></IconButton>)
+                  }
             }}
         >
-            <Stack.Screen name="Welcome" component={WelcomeScreen} options={{
-                headerRight: ({ tintColor }) => (<IconButton
-                    icon="exit"
-                    color={tintColor}
-                    size={24}
-                    onPress={authCtx.logout}
-                />),
-            }} />
-        </Stack.Navigator>
+            <BottonTabs.Screen name="Welcome" component={WelcomeScreen} 
+            options={{
+                title : 'Home',
+                tabBarLabel: 'Home',
+                tabBarIcon: ({color,size}) =><IconButton 
+                icon={'home'} 
+                size={size} 
+                color={color} 
+                onPress={authCtx.logout}></IconButton>
+                }}
+            />
+        </BottonTabs.Navigator>
     );
 }
 function AuthenticatedAdminStack() {
