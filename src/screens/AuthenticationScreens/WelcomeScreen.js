@@ -10,8 +10,6 @@ import { getUserInfo } from '../../util/auth';
 import { ReadAllDocumentByCollection, WriteByCollectionAndId, getByCollectionAndId, getByCollectionWithWhere, getDataWithWhereAndCollection } from '../../repository/repository';
 
 function WelcomeScreen() {
-  const auth = getAuth()
-  const todo = firebase.firestore().collection('courses').doc("64RqlG8KhjK8GYuTWwjQ____");
   const [userInfo, setUserInfo] = useState({})
   useEffect(() => {
     const func = async () => {
@@ -22,9 +20,9 @@ function WelcomeScreen() {
     func();
   }, [])
 
-  useEffect(() => {
-    leggiDati();
-  }, []);
+  // useEffect(() => {
+  //   leggiDati();
+  // }, []);
   
     const leggiDati = () => {
       ReadAllDocumentByCollection('ristoranti')

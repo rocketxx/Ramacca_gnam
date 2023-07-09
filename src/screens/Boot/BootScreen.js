@@ -12,9 +12,11 @@ import { Colors } from '../../constants/styles';
 import AuthContextProvider, { AuthContext } from '../../store/auth-contenxt';
 import LoginScreen from '../AuthenticationScreens/LoginScreen';
 import SignupScreen from '../AuthenticationScreens/SignupScreen';
+import CartScreen from '../AuthenticationScreens/CartScreen';
 import WelcomeAdminScreen from '../AuthenticationScreens/WelcomeAdminScreen';
 import WelcomeScreen from '../AuthenticationScreens/WelcomeScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import ClientProfileScreen from '../AuthenticationScreens/ClientProfileScreen';
 
 const Stack = createNativeStackNavigator();
 const BottonTabs = createBottomTabNavigator();
@@ -42,25 +44,44 @@ function AuthenticatedStack() {
                 headerStyle: { backgroundColor: Colors.primary500 },
                 headerTintColor: 'white',
                 contentStyle: { backgroundColor: Colors.primary100 },
-                headerRight: ({tintColor}) =>{
+                headerRight: ({ tintColor }) => {
                     return (
-                    <IconButton 
-                      icon={'exit'} 
-                      size={24} 
-                      color={tintColor} 
-                      onPress={authCtx.logout}></IconButton>)
-                  }
+                        <IconButton
+                            icon={'exit'}
+                            size={24}
+                            color={tintColor}
+                            onPress={authCtx.logout}></IconButton>)
+                }
             }}
-        >
-            <BottonTabs.Screen name="Welcome" component={WelcomeScreen} 
+        >           
+        <BottonTabs.Screen name="Ordini" component={CartScreen}
             options={{
-                title : 'Home',
-                tabBarLabel: 'Home',
-                tabBarIcon: ({color,size}) =><IconButton 
-                icon={'home'} 
-                size={size} 
-                color={color} 
-                onPress={authCtx.logout}></IconButton>
+                title: 'Ordini',
+                tabBarLabel: 'Ordini',
+                tabBarIcon: ({ color, size }) => <IconButton
+                    icon={'cart'}
+                    size={size}
+                    color={color}></IconButton>
+            }}
+        />   
+            <BottonTabs.Screen name="Welcome" component={WelcomeScreen}
+                options={{
+                    title: 'Home',
+                    tabBarLabel: 'Home',
+                    tabBarIcon: ({ color, size }) => <IconButton
+                        icon={'home'}
+                        size={size}
+                        color={color}></IconButton>
+                }}
+            />          
+            <BottonTabs.Screen name="Profilo" component={ClientProfileScreen}
+                options={{
+                    title: 'Profilo',
+                    tabBarLabel: 'Profilo',
+                    tabBarIcon: ({ color, size }) => <IconButton
+                        icon={'person'}
+                        size={size}
+                        color={color}></IconButton>
                 }}
             />
         </BottonTabs.Navigator>
