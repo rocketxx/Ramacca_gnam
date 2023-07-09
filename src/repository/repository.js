@@ -149,7 +149,98 @@ export function getDataWithWhereAndCollection(collectionName, fieldName, operato
     });
   }
   
-
+export function loadDataToFirebase()
+{
+    const ristoranti = [
+        {
+          nome: "Ristorante 1",
+          via: "Via Ristorante 1",
+          tipologiaCibo: ["pizza"],
+          aperto: true,
+          image: ""        
+        },
+        {
+          nome: "Ristorante 2",
+          via: "Via Ristorante 2",
+          tipologiaCibo: ["panini"],
+          aperto: false,
+          image: ""
+        },
+        {
+          nome: "Ristorante 3",
+          via: "Via Ristorante 3",
+          tipologiaCibo: ["panini"],
+          aperto: false,
+          image: ""
+        },
+        {
+          nome: "Ristorante 4",
+          via: "Via Ristorante 4",
+          tipologiaCibo: ["pizza"],
+          aperto: false,
+          image: ""
+        },
+        {
+          nome: "Ristorante 5",
+          via: "Via Ristorante 2",
+          tipologiaCibo: ["panini"],
+          aperto: false,
+          image: ""
+        },
+        {
+          nome: "Ristorante 6",
+          via: "Via Ristorante 2",
+          tipologiaCibo: ["panini"],
+          aperto: false,
+          image: ""
+        },
+        {
+          nome: "Ristorante 7",
+          via: "Via Ristorante 2",
+          tipologiaCibo: ["pizza"],
+          aperto: false,
+          image: ""
+        },
+        {
+          nome: "Ristorante 7",
+          via: "Via Ristorante 2",
+          tipologiaCibo: ["pizza"],
+          aperto: false,
+          image: ""
+        },
+        {
+          nome: "Ristorante 2",
+          via: "Via Ristorante 2",
+          tipologiaCibo: ["panini"],
+          aperto: false,
+          image: ""
+        },
+        {
+          nome: "Ristorante 2",
+          via: "Via Ristorante 2",
+          tipologiaCibo: ["panini"],
+          aperto: false,
+          image: ""
+        },
+        {
+          nome: "Ristorante 3",
+          via: "Via Ristorante 3",
+          tipologiaCibo: ["pizza", "panini"],
+          aperto: true,
+          image: ""        }
+      ];
+      
+      // Aggiungi i ristoranti a Firebase Firestore
+      ristoranti.forEach((ristorante) => {
+        DB.collection("ristoranti").add(ristorante)
+          .then((docRef) => {
+            console.log("Ristorante aggiunto con ID:", docRef.id);
+          })
+          .catch((error) => {
+            console.error("Errore durante l'aggiunta del ristorante:", error);
+          });
+      });   
+}
   //scrittura di intere collezioni:
   /*
 useEffect(() => {
@@ -162,8 +253,8 @@ const leggiDati = () => {
       nome: "Ristorante 1",
       via: "Via Ristorante 1",
       tipologiaCibo: ["pizza"],
-      aperto: true
-    },
+      aperto: true,
+      image: ""    },
     {
       nome: "Ristorante 2",
       via: "Via Ristorante 2",
