@@ -1,6 +1,5 @@
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
 import jwt_decode from "jwt-decode";
-// import { useEffect, useState } from '@react-native-firebase/database';
 import { useEffect, useState } from 'react';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 
@@ -11,8 +10,11 @@ import { ReadAllDocumentByCollection, WriteByCollectionAndId, getByCollectionAnd
 import CardGnam from '../../components/ui/CardGnam';
 
 function WelcomeScreen() {
-  const [userInfo, setUserInfo] = useState({})
-  const [restaurants, setRestaurants] = useState({})
+  const [userInfo, setUserInfo] = useState({});
+  const [restaurants, setRestaurants] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('panini');
+const PANINO = 'panini';
+const PIZZA = 'pizza'
   useEffect(() => {
     const func = async () => {
       await getUserInfo().then((res) => {
@@ -20,7 +22,7 @@ function WelcomeScreen() {
       })
     }
     func();
-  }, [])
+  }, []);
 
   useEffect(() => {
     ReadRestaurantsData();
@@ -38,34 +40,74 @@ function WelcomeScreen() {
     });
   };
   
-  
-    const ReadRestaurantsData = () => {
-      ReadAllDocumentByCollection('ristoranti')
-        .then((results) => {
-          console.log(results)
-          OrderByState(results)
-          setRestaurants(results)
-        })
-        .catch((error) => {
-              console.log("Errore nella lettura dei dati:", error);
-            });
-        };
+  const handlePress = (category) => {
+    setSelectedCategory(category);
+  };
+
+  const filteredRestaurants = selectedCategory
+    ? restaurants.filter((item) => item.tipologiaCibo.includes(selectedCategory))
+    : restaurants;
+
+  const ReadRestaurantsData = () => {
+    ReadAllDocumentByCollection('ristoranti')
+      .then((results) => {
+        OrderByState(results);
+        setRestaurants(results);
+      })
+      .catch((error) => {
+        console.log("Errore nella lettura dei dati:", error);
+      });
+  };
 
   return (
     <View style={styles.rootContainer}>
+      <View style={styles.buttonsContainer}>
+        <Pressable
+          style={[
+            styles.button,
+            selectedCategory === PANINO && styles.selectedButton
+          ]}
+          onPress={() => handlePress(PANINO)}
+        >
+          <Text
+            style={[
+              styles.buttonText,
+              selectedCategory === PANINO && styles.selectedButtonText
+            ]}
+          >
+            Panino
+          </Text>
+        </Pressable>
+        <Pressable
+          style={[
+            styles.button,
+            selectedCategory === PIZZA && styles.selectedButton
+          ]}
+          onPress={() => handlePress(PIZZA)}
+        >
+          <Text
+            style={[
+              styles.buttonText,
+              selectedCategory === PIZZA && styles.selectedButtonText
+            ]}
+          >
+            Pizza
+          </Text>
+        </Pressable>
+      </View>
       <FlatList
-        data={restaurants}
-        numColumns={1}
-        renderItem={({item}) =>(
-          <Pressable>
-          <CardGnam image={item.image} title={item.nome} subTitle={item.via} aperto={item.aperto}></CardGnam>
-          </Pressable>
+        data={filteredRestaurants}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <CardGnam
+            image={item.image}
+            title={item.nome}
+            subTitle={item.via}
+            aperto={item.aperto}
+          />
         )}
         showsVerticalScrollIndicator={false}
-      ></FlatList>
-      {/* <Text style={styles.title}>Benvenuto!</Text>
-      <Text style={styles.title}>{userInfo?.email}</Text>
-      <Text>Utente!</Text> */}
+      />
     </View>
   );
 }
@@ -79,9 +121,27 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 32,
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 8,
+  buttonsContainer: {
+    flexDirection: 'row',
+    marginBottom: 16,
+  },
+  button: {
+    flex: 1,
+    marginRight: 8,
+    padding: 8,
+    borderRadius: 8,
+    backgroundColor: '#ccc',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  selectedButton: {
+    backgroundColor: '#008000',
+  },
+  buttonText: {
+    fontSize: 16,
+    color: '#000',
+  },
+  selectedButtonText: {
+    color: '#fff',
   },
 });
