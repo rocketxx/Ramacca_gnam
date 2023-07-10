@@ -157,77 +157,77 @@ export function loadDataToFirebase()
           via: "Via Ristorante 1",
           tipologiaCibo: ["pizza"],
           aperto: true,
-          image: ""        
+          image: "https://cdn.pixabay.com/photo/2017/12/10/14/47/pizza-3010062_960_720.jpg"        
         },
         {
           nome: "Ristorante 2",
           via: "Via Ristorante 2",
           tipologiaCibo: ["panini"],
           aperto: false,
-          image: ""
+          image: "https://cdn.pixabay.com/photo/2019/01/21/12/47/burger-3946012_960_720.jpg"
         },
         {
           nome: "Ristorante 3",
           via: "Via Ristorante 3",
           tipologiaCibo: ["panini"],
           aperto: false,
-          image: ""
+          image: "https://cdn.pixabay.com/photo/2019/01/21/12/47/burger-3946012_960_720.jpg"
         },
         {
           nome: "Ristorante 4",
           via: "Via Ristorante 4",
           tipologiaCibo: ["pizza"],
           aperto: false,
-          image: ""
+          image: "https://cdn.pixabay.com/photo/2017/12/10/14/47/pizza-3010062_960_720.jpg"
         },
         {
           nome: "Ristorante 5",
           via: "Via Ristorante 2",
           tipologiaCibo: ["panini"],
           aperto: false,
-          image: ""
+          image: "https://cdn.pixabay.com/photo/2019/01/21/12/47/burger-3946012_960_720.jpg"
         },
         {
           nome: "Ristorante 6",
           via: "Via Ristorante 2",
           tipologiaCibo: ["panini"],
           aperto: false,
-          image: ""
+          image: "https://cdn.pixabay.com/photo/2019/01/21/12/47/burger-3946012_960_720.jpg"
         },
         {
           nome: "Ristorante 7",
           via: "Via Ristorante 2",
           tipologiaCibo: ["pizza"],
           aperto: false,
-          image: ""
+          image: "https://cdn.pixabay.com/photo/2017/12/10/14/47/pizza-3010062_960_720.jpg"
         },
         {
           nome: "Ristorante 7",
           via: "Via Ristorante 2",
           tipologiaCibo: ["pizza"],
           aperto: false,
-          image: ""
+          image: "https://cdn.pixabay.com/photo/2017/12/10/14/47/pizza-3010062_960_720.jpg"
         },
         {
           nome: "Ristorante 2",
           via: "Via Ristorante 2",
           tipologiaCibo: ["panini"],
           aperto: false,
-          image: ""
+          image: "https://cdn.pixabay.com/photo/2019/01/21/12/47/burger-3946012_960_720.jpg"
         },
         {
           nome: "Ristorante 2",
           via: "Via Ristorante 2",
           tipologiaCibo: ["panini"],
           aperto: false,
-          image: ""
+          image: "https://cdn.pixabay.com/photo/2019/01/21/12/47/burger-3946012_960_720.jpg"
         },
         {
           nome: "Ristorante 3",
           via: "Via Ristorante 3",
           tipologiaCibo: ["pizza", "panini"],
           aperto: true,
-          image: ""        }
+          image: "https://cdn.pixabay.com/photo/2017/12/10/14/47/pizza-3010062_960_720.jpg"        }
       ];
       
       // Aggiungi i ristoranti a Firebase Firestore

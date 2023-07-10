@@ -8,9 +8,11 @@ import { firebase } from '../../modules/firebase'
 import { AuthContext } from "../../store/auth-contenxt";
 import { getUserInfo } from '../../util/auth';
 import { ReadAllDocumentByCollection, WriteByCollectionAndId, getByCollectionAndId, getByCollectionWithWhere, getDataWithWhereAndCollection } from '../../repository/repository';
+import CardGnam from '../../components/ui/CardGnam';
 
 function WelcomeScreen() {
   const [userInfo, setUserInfo] = useState({})
+  const [restaurants, setRestaurants] = useState({})
   useEffect(() => {
     const func = async () => {
       await getUserInfo().then((res) => {
@@ -20,62 +22,50 @@ function WelcomeScreen() {
     func();
   }, [])
 
-  // useEffect(() => {
-  //   leggiDati();
-  // }, []);
+  useEffect(() => {
+    ReadRestaurantsData();
+  }, []);
+
+  const OrderByState = (data) => {
+    data.sort((a, b) => {
+      if (a.aperto && !b.aperto) {
+        return -1; // a viene prima di b
+      } else if (!a.aperto && b.aperto) {
+        return 1; // a viene dopo b
+      } else {
+        return 0; // mantieni l'ordine corrente
+      }
+    });
+  };
   
-    const leggiDati = () => {
+  
+    const ReadRestaurantsData = () => {
       ReadAllDocumentByCollection('ristoranti')
         .then((results) => {
           console.log(results)
+          OrderByState(results)
+          setRestaurants(results)
         })
         .catch((error) => {
               console.log("Errore nella lettura dei dati:", error);
             });
         };
 
-  ////lettura
-  //   todo.get().then((doc) => {
-  //     if (doc.exists) {
-  //         console.log("Document data:", doc.data());
-  //     } else {
-  //         console.log("No such document!");
-  //     }
-  // }).catch((error) => {
-  //     console.log("Error getting document:", error);
-  // });
-
-  //scrittura
-  // firebase.auth().setc
-  // const todo2 = firebase.firestore().collection('todos').doc("LWmqBEQ7kGOLNdDK3SuR").set({
-  //   name: "Los Angeles",
-  //   state: "CA",
-  //   country: "USA"
-  // })
-  // .then(() => {
-  //   console.log("Document successfully written!");
-  // })
-  // .catch((error) => {
-  //   console.error("Error writing document: ", error);
-  // });
-  //
-
   return (
     <View style={styles.rootContainer}>
-      {/* <FlatList
-        data={users}
+      <FlatList
+        data={restaurants}
         numColumns={1}
         renderItem={({item}) =>(
           <Pressable>
-            <View>
-              <Text>{item.text1}</Text>
-            </View>
+          <CardGnam image={item.image} title={item.nome} subTitle={item.via} aperto={item.aperto}></CardGnam>
           </Pressable>
         )}
-      ></FlatList> */}
-      <Text style={styles.title}>Benvenuto!</Text>
+        showsVerticalScrollIndicator={false}
+      ></FlatList>
+      {/* <Text style={styles.title}>Benvenuto!</Text>
       <Text style={styles.title}>{userInfo?.email}</Text>
-      <Text>Utente!</Text>
+      <Text>Utente!</Text> */}
     </View>
   );
 }
