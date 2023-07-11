@@ -17,9 +17,20 @@ import WelcomeAdminScreen from '../AuthenticationScreens/WelcomeAdminScreen';
 import WelcomeScreen from '../AuthenticationScreens/WelcomeScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import ClientProfileScreen from '../AuthenticationScreens/ClientProfileScreen';
+import RestaurantsHomeScreen from '../AuthenticationScreens/RestaurantsHomeScreen';
 
 const Stack = createNativeStackNavigator();
+const StackClient = createNativeStackNavigator();
 const BottonTabs = createBottomTabNavigator();
+
+const ClientRoot = () => {
+    return (
+      <StackClient.Navigator initialRouteName="Welcome" screenOptions={{headerShown: true}}>
+        <StackClient.Screen name="Welcome" component={WelcomeScreen} options={{headerShown: false}}/>
+        <StackClient.Screen name="RestaurantsHome" component={RestaurantsHomeScreen} options={{title : 'Ristorante'}}/>
+      </StackClient.Navigator>
+    );
+  };
 
 function AuthStack() {
     return (
@@ -64,7 +75,7 @@ function AuthenticatedStack() {
                     color={color}></IconButton>
             }}
         />   
-            <BottonTabs.Screen name="Welcome" component={WelcomeScreen}
+            <BottonTabs.Screen name="ClientRoot" component={ClientRoot}
                 options={{
                     title: 'Home',
                     tabBarLabel: 'Home',

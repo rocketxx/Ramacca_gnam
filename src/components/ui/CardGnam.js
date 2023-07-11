@@ -1,15 +1,23 @@
 import React from 'react';
 import { View, TouchableOpacity, Image, Text, StyleSheet } from 'react-native';
-import Button from './Button';
+import { useNavigation } from '@react-navigation/native';
 
 const CardGnam = ({ title, image, subTitle, aperto }) => {
+  const navigation = useNavigation();
+
   const containerStyle = aperto ? styles.container : styles.containerClosed;
   const imageStyle = aperto ? styles.image : [styles.image, styles.imageClosed];
   const textStyle = aperto ? styles.title : [styles.title, styles.titleClosed];
   const subtitleStyle = aperto ? styles.subtitle : [styles.subtitle, styles.subtitleClosed];
 
+  const handlePress = () => {
+    if (aperto) {
+      navigation.navigate('RestaurantsHome'); // Cambia il nome dello screen se necessario
+    }
+  };
+
   return (
-    <View style={containerStyle}>
+    <TouchableOpacity style={containerStyle} onPress={handlePress} disabled={!aperto}>
       <View style={styles.imageContainer}>
         {!aperto && <Text style={styles.closedText}>Chiuso</Text>}
         <Image source={{ uri: image }} style={imageStyle} />
@@ -19,12 +27,10 @@ const CardGnam = ({ title, image, subTitle, aperto }) => {
         <Text style={subtitleStyle}>{subTitle}</Text>
       </View>
       <View style={styles.button}>
-        {/* <Button onPress={() => navigation.navigate('Login')} title={'Dettaglio'}></Button> */}
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
