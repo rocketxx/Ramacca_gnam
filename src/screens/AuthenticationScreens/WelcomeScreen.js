@@ -104,6 +104,7 @@ const PIZZA = 'pizza'
             title={item.nome}
             subTitle={item.via}
             aperto={item.aperto}
+            idRest={item.id}
           />
         )}
         showsVerticalScrollIndicator={false}
