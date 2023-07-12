@@ -8,7 +8,6 @@ const CardItemMenu = ({ id, title, image, subTitle, disponibile }) => {
   const dispatch = useDispatch();
   const reduxQuantity = useSelector((state) => {
     const counter = state.counters.find((counter) => counter.id === id);
-    console.log("COUNTEr: ",counter)
     return counter ? counter.quantity : 0;
   });
 
@@ -23,16 +22,16 @@ const CardItemMenu = ({ id, title, image, subTitle, disponibile }) => {
   const handleIncrement = () => {
     const newLocalQuantity = localQuantity + 1;
     setLocalQuantity(newLocalQuantity);
-    dispatch(updateQuantity(id, reduxQuantity + 1));
+    dispatch(updateQuantity(id, newLocalQuantity));
   };
 
   const handleDecrement = () => {
     if (localQuantity > 0) {
       const newLocalQuantity = localQuantity - 1;
       setLocalQuantity(newLocalQuantity);
-      dispatch(updateQuantity(id, reduxQuantity - 1));
-    } else if (reduxQuantity > 0) {
-      dispatch(updateQuantity(id, reduxQuantity - 1));
+      dispatch(updateQuantity(id, localQuantity - 1));
+    } else if (localQuantity > 0) {
+      dispatch(updateQuantity(id, localQuantity - 1));
     }
   };
 

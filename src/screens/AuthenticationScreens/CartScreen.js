@@ -27,10 +27,10 @@
 // export default CartScreen;
 
 // import React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
-// import { useSelector } from 'react-redux';
+import { getUserInfo } from '../../util/auth'
 
 const CartScreen = () => {
       const [userInfo, setUserInfo] = useState({})
@@ -40,18 +40,16 @@ const CartScreen = () => {
         await getUserInfo().then((res) => {
           setUserInfo(res)
         })
-        console.log(data)
+        console.log("IN CART: ",data)
       }
       func();
     }, [])
   return (
 
     <View style={styles.container}>
-      {/* <Text style={styles.title}>Dati Salvati</Text>
-      {data.map((item) => (
+      <Text style={styles.title}>Dati Salvati</Text>
+      {/* {data.map((item) => (
         <View key={item.id} style={styles.itemContainer}>
-          <Text style={styles.itemTitle}>{item.title}</Text>
-          <Text style={styles.itemDescription}>{item.description}</Text>
           <Text style={styles.itemQuantity}>{item.quantity}</Text>
           <Text>{userInfo?.email}</Text>
         </View>
