@@ -10,6 +10,7 @@ function RestaurantsHomeScreen() {
     const [menuData, setMenuData] = useState([])
     const route = useRoute();
     const { data } = route.params;
+    var mockID = 0;
     // console.log(data)
     useEffect(() => {
         leggiDati();
@@ -35,6 +36,7 @@ function RestaurantsHomeScreen() {
                     data={menuData}
                     renderItem={({ item }) => (
                         <CardItemMenu
+                            id={mockID+1}
                             image={"https://cdn.pixabay.com/photo/2014/10/19/20/59/hamburger-494706_960_720.jpg"}
                             title={item.nome}
                             subTitle={item.descrizione}

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, TouchableOpacity, Image, Text, StyleSheet } from 'react-native';
 import { Colors } from '../../constants/styles';
 
-const CardItemMenu = ({ title, image, subTitle, disponibile }) => {
+const CardItemMenu = ({ id, title, image, subTitle, disponibile }) => {
   const [quantity, setQuantity] = useState(0);
 
   const containerStyle = disponibile ? styles.container : styles.containerClosed;
@@ -12,6 +12,8 @@ const CardItemMenu = ({ title, image, subTitle, disponibile }) => {
 
   const handleIncrement = () => {
     setQuantity(quantity + 1);
+    //inserisci quantità e id su redux
+    //magari un dizionario con id => quantità che poi caricherai in blocco su firebase
   };
 
   const handleDecrement = () => {
@@ -21,7 +23,7 @@ const CardItemMenu = ({ title, image, subTitle, disponibile }) => {
   };
 
   const handlePress = () => {
-    // Gestisce l'azione al click sulla card
+    // Gestisci l'azione al click sulla card
   };
 
   return (
@@ -73,7 +75,6 @@ const styles = StyleSheet.create({
   content: {
     padding: 16,
     paddingRight: 200,
-    paddingBottom: 28
   },
   title: {
     fontSize: 18,
@@ -95,14 +96,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    // marginTop: 20,
-    marginBottom: 20
+    marginBottom: 15
   },
   button: {
     width: 32,
     height: 32,
     borderRadius: 16,
-    backgroundColor: Colors.primary500,
+    backgroundColor: Colors.primary200,
     justifyContent: 'center',
     alignItems: 'center',
   },

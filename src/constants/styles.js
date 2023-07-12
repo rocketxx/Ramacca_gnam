@@ -4,4 +4,5 @@ export const Colors = {
   primary800: '#1F4C99',
   error100: '#FCE7E7',
   error500: '#D93025',
+  primary200: '#008000'
 }
