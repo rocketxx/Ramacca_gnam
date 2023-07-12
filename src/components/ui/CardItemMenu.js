@@ -1,9 +1,18 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity, Image, Text, StyleSheet } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateQuantity } from '../../redux/actions';
 import { Colors } from '../../constants/styles';
 
 const CardItemMenu = ({ id, title, image, subTitle, disponibile }) => {
-  const [quantity, setQuantity] = useState(0);
+  const dispatch = useDispatch();
+  const reduxQuantity = useSelector((state) => {
+    const counter = state.counters.find((counter) => counter.id === id);
+    return counter ? counter.quantity : 0;
+  });
+
+  const [localQuantity, setLocalQuantity] = useState(0);
+  const quantity = localQuantity + reduxQuantity;
 
   const containerStyle = disponibile ? styles.container : styles.containerClosed;
   const imageStyle = disponibile ? styles.image : [styles.image, styles.imageClosed];
@@ -11,14 +20,18 @@ const CardItemMenu = ({ id, title, image, subTitle, disponibile }) => {
   const subtitleStyle = disponibile ? styles.subtitle : [styles.subtitle, styles.subtitleClosed];
 
   const handleIncrement = () => {
-    setQuantity(quantity + 1);
-    //inserisci quantità e id su redux
-    //magari un dizionario con id => quantità che poi caricherai in blocco su firebase
+    const newLocalQuantity = localQuantity + 1;
+    setLocalQuantity(newLocalQuantity);
+    dispatch(updateQuantity(id, reduxQuantity + 1));
   };
 
   const handleDecrement = () => {
-    if (quantity > 0) {
-      setQuantity(quantity - 1);
+    if (localQuantity > 0) {
+      const newLocalQuantity = localQuantity - 1;
+      setLocalQuantity(newLocalQuantity);
+      dispatch(updateQuantity(id, reduxQuantity - 1));
+    } else if (reduxQuantity > 0) {
+      dispatch(updateQuantity(id, reduxQuantity - 1));
     }
   };
 

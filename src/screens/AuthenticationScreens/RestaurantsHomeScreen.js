@@ -5,6 +5,7 @@ import { loadDataMenuToFirebase, getDataWithWhereAndCollectionArrayList } from '
 import { useEffect, useState } from 'react';
 import CardGnam from '../../components/ui/CardGnam';
 import CardItemMenu from '../../components/ui/CardItemMenu';
+import ReduxProvider from '../../redux/store';
 
 function RestaurantsHomeScreen() {
     const [menuData, setMenuData] = useState([])
@@ -30,13 +31,13 @@ function RestaurantsHomeScreen() {
     // console.log(idRestaurant);
     return (
         <>
-        
+        <ReduxProvider>
             <View style={styles.rootContainer}>
                 <FlatList
                     data={menuData}
                     renderItem={({ item }) => (
                         <CardItemMenu
-                            id={mockID+1}
+                            id={mockID+=1}
                             image={"https://cdn.pixabay.com/photo/2014/10/19/20/59/hamburger-494706_960_720.jpg"}
                             title={item.nome}
                             subTitle={item.descrizione}
@@ -47,6 +48,8 @@ function RestaurantsHomeScreen() {
                 />
             </View>
             {/* <Button onPress={loadDataMenuToFirebase}>LOAD DATA</Button> */}
+
+        </ReduxProvider>
         </>
     )
 }
