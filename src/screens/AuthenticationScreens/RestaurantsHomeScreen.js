@@ -4,6 +4,7 @@ import Button from '../../components/ui/Button';
 import { loadDataMenuToFirebase, getDataWithWhereAndCollectionArrayList } from '../../repository/repository';
 import { useEffect, useState } from 'react';
 import CardGnam from '../../components/ui/CardGnam';
+import CardItemMenu from '../../components/ui/CardItemMenu';
 
 function RestaurantsHomeScreen() {
     const [menuData, setMenuData] = useState([])
@@ -28,15 +29,16 @@ function RestaurantsHomeScreen() {
     // console.log(idRestaurant);
     return (
         <>
+        
             <View style={styles.rootContainer}>
                 <FlatList
                     data={menuData}
                     renderItem={({ item }) => (
-                        <CardGnam
+                        <CardItemMenu
                             image={"https://cdn.pixabay.com/photo/2014/10/19/20/59/hamburger-494706_960_720.jpg"}
                             title={item.nome}
                             subTitle={item.descrizione}
-                            aperto={item.disponibile}
+                            disponibile={item.disponibile}
                         />
                     )}
                     showsVerticalScrollIndicator={false}
