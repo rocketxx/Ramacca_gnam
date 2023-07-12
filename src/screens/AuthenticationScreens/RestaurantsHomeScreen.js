@@ -31,7 +31,7 @@ function RestaurantsHomeScreen() {
     // console.log(idRestaurant);
     return (
         <>
-        <ReduxProvider>
+        {/* <ReduxProvider> */}
             <View style={styles.rootContainer}>
                 <FlatList
                     data={menuData}
@@ -49,7 +49,7 @@ function RestaurantsHomeScreen() {
             </View>
             {/* <Button onPress={loadDataMenuToFirebase}>LOAD DATA</Button> */}
 
-        </ReduxProvider>
+        {/* </ReduxProvider> */}
         </>
     )
 }

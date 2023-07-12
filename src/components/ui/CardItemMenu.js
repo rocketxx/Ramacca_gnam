@@ -8,11 +8,12 @@ const CardItemMenu = ({ id, title, image, subTitle, disponibile }) => {
   const dispatch = useDispatch();
   const reduxQuantity = useSelector((state) => {
     const counter = state.counters.find((counter) => counter.id === id);
+    console.log("COUNTEr: ",counter)
     return counter ? counter.quantity : 0;
   });
 
   const [localQuantity, setLocalQuantity] = useState(0);
-  const quantity = localQuantity + reduxQuantity;
+  const quantity= localQuantity + reduxQuantity;
 
   const containerStyle = disponibile ? styles.container : styles.containerClosed;
   const imageStyle = disponibile ? styles.image : [styles.image, styles.imageClosed];

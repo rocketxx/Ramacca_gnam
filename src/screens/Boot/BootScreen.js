@@ -18,6 +18,7 @@ import WelcomeScreen from '../AuthenticationScreens/WelcomeScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import ClientProfileScreen from '../AuthenticationScreens/ClientProfileScreen';
 import RestaurantsHomeScreen from '../AuthenticationScreens/RestaurantsHomeScreen';
+import ReduxProvider from '../../redux/store';
 
 const Stack = createNativeStackNavigator();
 const StackClient = createNativeStackNavigator();
@@ -50,6 +51,9 @@ function AuthStack() {
 function AuthenticatedStack() {
     const authCtx = useContext(AuthContext);
     return (
+        <ReduxProvider>
+
+        
         <BottonTabs.Navigator
             screenOptions={{
                 headerStyle: { backgroundColor: Colors.primary500 },
@@ -96,6 +100,7 @@ function AuthenticatedStack() {
                 }}
             />
         </BottonTabs.Navigator>
+        </ReduxProvider>
     );
 }
 function AuthenticatedAdminStack() {
