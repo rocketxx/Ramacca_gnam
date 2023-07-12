@@ -1,10 +1,5 @@
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
-import jwt_decode from "jwt-decode";
 import { useEffect, useState } from 'react';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
-
-import { firebase } from '../../modules/firebase'
-import { AuthContext } from "../../store/auth-contenxt";
 import { getUserInfo } from '../../util/auth';
 import { ReadAllDocumentByCollection, WriteByCollectionAndId, getByCollectionAndId, getByCollectionWithWhere, getDataWithWhereAndCollection } from '../../repository/repository';
 import CardGnam from '../../components/ui/CardGnam';
@@ -104,7 +99,8 @@ const PIZZA = 'pizza'
             title={item.nome}
             subTitle={item.via}
             aperto={item.aperto}
-            idRest={item.id}
+            route={'RestaurantsHome'}
+            payloadRoute={item.id}
           />
         )}
         showsVerticalScrollIndicator={false}

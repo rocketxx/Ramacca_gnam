@@ -2,7 +2,7 @@ import React from 'react';
 import { View, TouchableOpacity, Image, Text, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const CardGnam = ({ title, image, subTitle, aperto,idRest }) => {
+const CardGnam = ({ title, image, subTitle, aperto,route,payloadRoute }) => {
   const navigation = useNavigation();
 
   const containerStyle = aperto ? styles.container : styles.containerClosed;
@@ -11,8 +11,8 @@ const CardGnam = ({ title, image, subTitle, aperto,idRest }) => {
   const subtitleStyle = aperto ? styles.subtitle : [styles.subtitle, styles.subtitleClosed];
 
   const handlePress = () => {
-    if (aperto) {
-      navigation.navigate('RestaurantsHome',{data: idRest}); // Cambia il nome dello screen se necessario
+    if (aperto && route!=undefined) {
+      navigation.navigate(route,{data: payloadRoute}); // Cambia il nome dello screen se necessario
     }
   };
 
