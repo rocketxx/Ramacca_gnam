@@ -26,7 +26,7 @@ const QuantityCounter = ({ id }) => {
     //   id: id,
     //   quantity: quantity
     // }));
-
+    // const { counters, ...cleanData } = countersObject;
     console.log(countersObject);
   };
 
