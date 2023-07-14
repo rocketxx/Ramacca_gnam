@@ -24,9 +24,11 @@ const QuantityCounter = ({ id }) => {
 
   const leggiCounterCorretto = (countersObject) => {
     const tmp = Object.entries(countersObject).map(item => {
-      // console.log(item)
     });
-    console.log("EHI: ",countersObject.counters[5]['quantity'])
+    console.log(countersObject)
+    // console.log("EHI: ",countersObject.counters[5]['quantity'])
+    //MODIFICA IN CART
+     
     
     // console.log(tmp); // Output: {}
     // console.log(countersObject);
