@@ -7,6 +7,7 @@ import { formToJSON } from 'axios';
 const QuantityCounter = ({ id }) => {
   const [quantity, setQuantity] = useState(0);
   const dispatch = useDispatch();
+  //indicando state.counters sto indicando di usare il reducers counters. ci sono altri reducers oltre counters volendo
   const counters = useSelector(state => state.counters);
 
   const handleIncrement = () => {

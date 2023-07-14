@@ -8,6 +8,7 @@ import CardItemMenu from '../../components/ui/CardItemMenu';
 import ReduxProvider from '../../redux/store';
 import { useSelector } from 'react-redux';
 import { selectCount } from '../../redux/reducers';
+import ButtonCustom from '../../components/ui/ButtonCustom';
 
 function RestaurantsHomeScreen() {
     const [menuData, setMenuData] = useState([])
@@ -40,6 +41,7 @@ function RestaurantsHomeScreen() {
         <>
         {/* <ReduxProvider> */}
             <View style={styles.rootContainer}>
+              <ButtonCustom title={"Panino Personalizzato"}></ButtonCustom>
                 <FlatList
                     data={menuData}
                     renderItem={({ item }) => (
