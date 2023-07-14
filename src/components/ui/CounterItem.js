@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateQuantity } from '../../redux/actions';
+import { formToJSON } from 'axios';
 
 const QuantityCounter = ({ id }) => {
   const [quantity, setQuantity] = useState(0);
@@ -22,12 +23,13 @@ const QuantityCounter = ({ id }) => {
   };
 
   const leggiCounterCorretto = (countersObject) => {
-    // const tmp = Object.entries(countersObject).map(([id, quantity]) => ({
-    //   id: id,
-    //   quantity: quantity
-    // }));
-    // const { counters, ...cleanData } = countersObject;
-    console.log(countersObject);
+    const tmp = Object.entries(countersObject).map(item => {
+      // console.log(item)
+    });
+    console.log("EHI: ",countersObject.counters[5]['quantity'])
+    
+    // console.log(tmp); // Output: {}
+    // console.log(countersObject);
   };
 
   return (
