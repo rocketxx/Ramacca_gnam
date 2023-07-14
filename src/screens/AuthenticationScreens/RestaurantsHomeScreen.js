@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react';
 import CardGnam from '../../components/ui/CardGnam';
 import CardItemMenu from '../../components/ui/CardItemMenu';
 import ReduxProvider from '../../redux/store';
+import { useSelector } from 'react-redux';
+import { selectCount } from '../../redux/reducers';
 
 function RestaurantsHomeScreen() {
     const [menuData, setMenuData] = useState([])
@@ -28,6 +30,10 @@ function RestaurantsHomeScreen() {
             });
     };
 
+    function test()
+    {
+        // console.log("OU: ",reduxQuantity)
+    }
     // console.log(idRestaurant);
     return (
         <>
@@ -47,7 +53,7 @@ function RestaurantsHomeScreen() {
                     showsVerticalScrollIndicator={false}
                 />
             </View>
-            {/* <Button onPress={loadDataMenuToFirebase}>LOAD DATA</Button> */}
+            <Button onPress={test}>READ DATA</Button>
 
         {/* </ReduxProvider> */}
         </>

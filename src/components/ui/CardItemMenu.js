@@ -1,18 +1,10 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity, Image, Text, StyleSheet } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { updateQuantity } from '../../redux/actions';
 import { Colors } from '../../constants/styles';
+import CounterItem from './CounterItem';
 
 const CardItemMenu = ({ id, title, image, subTitle, disponibile }) => {
-  const dispatch = useDispatch();
-  const reduxQuantity = useSelector((state) => {
-    const counter = state.counters.find((counter) => counter.id === id);
-    return counter ? counter.quantity : 0;
-  });
-
-  const [localQuantity, setLocalQuantity] = useState(0);
-  const quantity= localQuantity + reduxQuantity;
+  const [quantity, setQuantity] = useState(0);
 
   const containerStyle = disponibile ? styles.container : styles.containerClosed;
   const imageStyle = disponibile ? styles.image : [styles.image, styles.imageClosed];
@@ -20,18 +12,14 @@ const CardItemMenu = ({ id, title, image, subTitle, disponibile }) => {
   const subtitleStyle = disponibile ? styles.subtitle : [styles.subtitle, styles.subtitleClosed];
 
   const handleIncrement = () => {
-    const newLocalQuantity = localQuantity + 1;
-    setLocalQuantity(newLocalQuantity);
-    dispatch(updateQuantity(id, newLocalQuantity));
+    setQuantity(quantity + 1);
+    //inserisci quantità e id su redux
+    //magari un dizionario con id => quantità che poi caricherai in blocco su firebase
   };
 
   const handleDecrement = () => {
-    if (localQuantity > 0) {
-      const newLocalQuantity = localQuantity - 1;
-      setLocalQuantity(newLocalQuantity);
-      dispatch(updateQuantity(id, localQuantity - 1));
-    } else if (localQuantity > 0) {
-      dispatch(updateQuantity(id, localQuantity - 1));
+    if (quantity > 0) {
+      setQuantity(quantity - 1);
     }
   };
 
@@ -50,13 +38,7 @@ const CardItemMenu = ({ id, title, image, subTitle, disponibile }) => {
         <Text style={subtitleStyle}>{subTitle}</Text>
       </View>
       <View style={styles.counter}>
-        <TouchableOpacity style={styles.button} onPress={handleDecrement} disabled={!disponibile || quantity === 0}>
-          <Text style={styles.buttonText}>-</Text>
-        </TouchableOpacity>
-        <Text style={styles.quantity}>{quantity}</Text>
-        <TouchableOpacity style={styles.button} onPress={handleIncrement} disabled={!disponibile}>
-          <Text style={styles.buttonText}>+</Text>
-        </TouchableOpacity>
+        <CounterItem id={id}></CounterItem>
       </View>
     </TouchableOpacity>
   );
