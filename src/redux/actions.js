@@ -1,6 +1,5 @@
-// Azione per aggiornare la quantità
+// actions.js
 export const updateQuantity = (id, quantity) => ({
-    type: 'UPDATE_QUANTITY',
-    payload: { id, quantity },
-  });
-  
+  type: 'UPDATE_QUANTITY',
+  payload: { id, quantity },
+});

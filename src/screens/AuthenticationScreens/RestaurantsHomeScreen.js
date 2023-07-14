@@ -15,6 +15,7 @@ function RestaurantsHomeScreen() {
     const { data } = route.params;
     var mockID = 0;
     // console.log(data)
+    const storedData = useSelector((state) => state.item);
     useEffect(() => {
         leggiDati();
     }, []);
@@ -32,7 +33,7 @@ function RestaurantsHomeScreen() {
 
     function test()
     {
-        // console.log("OU: ",reduxQuantity)
+        console.log("OU: ",storedData)
     }
     // console.log(idRestaurant);
     return (

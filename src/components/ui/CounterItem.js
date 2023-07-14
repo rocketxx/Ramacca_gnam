@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 
-const CounterItem = ({ id }) => {
+const QuantityCounter = ({ id }) => {
   const [quantity, setQuantity] = useState(0);
 
   const handleIncrement = () => {
@@ -52,4 +52,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CounterItem;
+export default QuantityCounter;

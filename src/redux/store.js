@@ -1,13 +1,11 @@
-// import { configureStore } from '@reduxjs/toolkit';
-// import countersReducer from './reducers';
-
-import { configureStore } from "@reduxjs/toolkit";
-import countersReducer from "./reducers";
-import { Provider } from 'react-redux';
+// store.js
+import { configureStore } from '@reduxjs/toolkit';
+import countersReducer from './reducers';
 
 const store = configureStore({
-  reducer: countersReducer,
+  reducer: {
+    counters: countersReducer,
+  },
 });
-export default function ReduxProvider({ children }) {
-  return <Provider store={store}>{children}</Provider>;
-}
+
+export default store;

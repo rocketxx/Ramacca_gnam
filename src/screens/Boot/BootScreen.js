@@ -19,6 +19,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import ClientProfileScreen from '../AuthenticationScreens/ClientProfileScreen';
 import RestaurantsHomeScreen from '../AuthenticationScreens/RestaurantsHomeScreen';
 import ReduxProvider from '../../redux/store';
+import { Provider } from 'react-redux';
+import store from '../../redux/store';
 
 const Stack = createNativeStackNavigator();
 const StackClient = createNativeStackNavigator();
@@ -51,7 +53,7 @@ function AuthStack() {
 function AuthenticatedStack() {
     const authCtx = useContext(AuthContext);
     return (
-        <ReduxProvider>
+        <Provider store={store}>
 
         
         <BottonTabs.Navigator
@@ -100,7 +102,7 @@ function AuthenticatedStack() {
                 }}
             />
         </BottonTabs.Navigator>
-        </ReduxProvider>
+        </Provider>
     );
 }
 function AuthenticatedAdminStack() {
