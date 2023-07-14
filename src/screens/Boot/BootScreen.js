@@ -54,8 +54,6 @@ function AuthenticatedStack() {
     const authCtx = useContext(AuthContext);
     return (
         <Provider store={store}>
-
-        
         <BottonTabs.Navigator
             screenOptions={{
                 headerStyle: { backgroundColor: Colors.primary500 },

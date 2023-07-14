@@ -54,7 +54,7 @@ function RestaurantsHomeScreen() {
                     showsVerticalScrollIndicator={false}
                 />
             </View>
-            <Button onPress={test}>READ DATA</Button>
+            {/* <Button onPress={test}>READ DATA</Button> */}
 
         {/* </ReduxProvider> */}
         </>
