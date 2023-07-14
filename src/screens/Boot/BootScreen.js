@@ -18,6 +18,7 @@ import WelcomeScreen from '../AuthenticationScreens/WelcomeScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import ClientProfileScreen from '../AuthenticationScreens/ClientProfileScreen';
 import RestaurantsHomeScreen from '../AuthenticationScreens/RestaurantsHomeScreen';
+import PiattoCustomScreen from '../AuthenticationScreens/PiattoCustomScreen';
 import ReduxProvider from '../../redux/store';
 import { Provider } from 'react-redux';
 import store from '../../redux/store';
@@ -31,6 +32,8 @@ const ClientRoot = () => {
       <StackClient.Navigator initialRouteName="Welcome" screenOptions={{headerShown: true}}>
         <StackClient.Screen name="Welcome" component={WelcomeScreen} options={{headerShown: false}}/>
         <StackClient.Screen name="RestaurantsHome" component={RestaurantsHomeScreen} options={{title : 'Ristorante'}}/>
+        {/* PiattoCustomScreen CUSTOM VA MESSO DENTRO UNA FUNZIONE INSIEME A RestaurantsHomeScreen (PRIMO DI DEFAULT) */}
+        {/* <StackClient.Screen name="PiattoCustom" component={PiattoCustomScreen} screenOptions={{headerShown: true}} /> */}
       </StackClient.Navigator>
     );
   };

@@ -1,4 +1,4 @@
-import { useRoute } from '@react-navigation/core';
+import { useNavigation, useRoute } from '@react-navigation/core';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import Button from '../../components/ui/Button';
 import { loadDataMenuToFirebase, getDataWithWhereAndCollectionArrayList } from '../../repository/repository';
@@ -13,6 +13,7 @@ import ButtonCustom from '../../components/ui/ButtonCustom';
 function RestaurantsHomeScreen() {
     const [menuData, setMenuData] = useState([])
     const route = useRoute();
+    const navigation = useNavigation();
     const { data } = route.params;
     var mockID = 0;
     // console.log(data)
@@ -42,6 +43,7 @@ function RestaurantsHomeScreen() {
         {/* <ReduxProvider> */}
             <View style={styles.rootContainer}>
               <ButtonCustom title={"Panino Personalizzato"}></ButtonCustom>
+              {/* <ButtonCustom title={"Panino Personalizzato"} onPress={navigation.navigate('PiattoCustom')}></ButtonCustom> */}
                 <FlatList
                     data={menuData}
                     renderItem={({ item }) => (
