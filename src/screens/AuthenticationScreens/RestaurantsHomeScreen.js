@@ -20,7 +20,7 @@ function RestaurantsHomeScreen() {
     const leggiDati = () => {
         getDataWithWhereAndCollectionArrayList("menu", "idRistorante", "==", data)
             .then((results) => {
-                console.log(results)
+                // console.log(results)
                 setMenuData(results)
             })
             .catch((error) => {
