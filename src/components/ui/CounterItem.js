@@ -28,8 +28,10 @@ const QuantityCounter = ({ id }) => {
     console.log(countersObject)
     // console.log("EHI: ",countersObject.counters[5]['quantity'])
     //MODIFICA IN CART
-     
-    
+    const ids = Object.keys(countersObject.counters);
+    console.log("ID Menu: ", ids);
+
+
     // console.log(tmp); // Output: {}
     // console.log(countersObject);
   };
