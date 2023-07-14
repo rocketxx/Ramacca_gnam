@@ -53,7 +53,7 @@ function AuthStack() {
 function AuthenticatedStack() {
     const authCtx = useContext(AuthContext);
     return (
-        <Provider store={store}>
+        // <Provider store={store}>
         <BottonTabs.Navigator
             screenOptions={{
                 headerStyle: { backgroundColor: Colors.primary500 },
@@ -100,7 +100,7 @@ function AuthenticatedStack() {
                 }}
             />
         </BottonTabs.Navigator>
-        </Provider>
+        // </Provider>
     );
 }
 function AuthenticatedAdminStack() {
@@ -135,9 +135,11 @@ function RBAC_system() {
 }
 function Navigation() {
     return (
-        <NavigationContainer>
-            {RBAC_system()}
-        </NavigationContainer>
+        <Provider store={store}>
+            <NavigationContainer>
+                {RBAC_system()}
+            </NavigationContainer>
+        </Provider>
     );
 }
 

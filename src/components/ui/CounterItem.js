@@ -1,17 +1,33 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateQuantity } from '../../redux/actions';
 
 const QuantityCounter = ({ id }) => {
   const [quantity, setQuantity] = useState(0);
+  const dispatch = useDispatch();
+  const counters = useSelector(state => state.counters);
 
   const handleIncrement = () => {
     setQuantity(quantity + 1);
+    dispatch(updateQuantity(id, quantity));
+    leggiCounterCorretto(counters);
   };
 
   const handleDecrement = () => {
     if (quantity > 0) {
       setQuantity(quantity - 1);
+      dispatch(updateQuantity(id, quantity));
     }
+  };
+
+  const leggiCounterCorretto = (countersObject) => {
+    // const tmp = Object.entries(countersObject).map(([id, quantity]) => ({
+    //   id: id,
+    //   quantity: quantity
+    // }));
+
+    console.log(countersObject);
   };
 
   return (
