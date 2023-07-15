@@ -38,7 +38,7 @@ function RestaurantsHomeScreen() {
   return (
     <>
       <View style={styles.rootContainer}>
-        {/* <ButtonCustom title={"Panino Personalizzato"} onPress={GoToCustom}></ButtonCustom> */}
+        <ButtonCustom title={"Panino Personalizzato"} onPress={GoToCustom}></ButtonCustom>
         <FlatList
           data={menuData}
           renderItem={({ item }) => (
@@ -48,7 +48,6 @@ function RestaurantsHomeScreen() {
               title={item.nome}
               subTitle={item.descrizione}
               disponibile={item.disponibile}
-              myroute={'PiattoCustom'}
             />
           )}
           showsVerticalScrollIndicator={false}
