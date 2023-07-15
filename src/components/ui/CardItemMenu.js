@@ -1,46 +1,61 @@
-import React, { useState } from 'react';
-import { View, TouchableOpacity, Text, StyleSheet,Modal } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, TouchableOpacity, Text, StyleSheet, Modal, Dimensions, Alert } from 'react-native';
 import { Colors } from '../../constants/styles';
 import Finestra from './Finestra';
 import { useNavigation } from '@react-navigation/core';
+import { Ionicons } from '@expo/vector-icons';
+import ListItemCondimenti from './ListItemCondimenti';
 
-const CardItemMenu = ({ id, title, subTitle, disponibile,myroute}) => {
+const CardItemMenu = ({ id, title, subTitle, disponibile, myroute }) => {
   const containerStyle = disponibile ? styles.container : styles.containerClosed;
   const textStyle = disponibile ? styles.title : [styles.title, styles.titleClosed];
   const subtitleStyle = disponibile ? styles.subtitle : [styles.subtitle, styles.subtitleClosed];
   const navigation = useNavigation();
   const [isModalVisible, setModalVisible] = useState(false);
+  const [modalWidth, setModalWidth] = useState(0);
+
+  useEffect(() => {
+    const screenWidth = Dimensions.get('window').width;
+    const modalWidth = Math.floor(screenWidth * 0.9);
+    setModalWidth(modalWidth);
+  }, []);
 
   const handlePress = () => {
-      console.log(id)
-      navigation.navigate(myroute)
+    console.log(id);
+    navigation.navigate(myroute);
   };
+
   const handleOpenModal = () => {
     setModalVisible(true);
-      // openModal();
   };
 
   const closeModal = () => {
-    setModalVisible(false);
+    Alert.alert(
+      'Conferma',
+      'Sei sicuro di voler chiudere? Perderai i dati inseriti.',
+      [
+        { text: 'Annulla', style: 'cancel' },
+        { text: 'Chiudi', style: 'destructive', onPress: () => setModalVisible(false) },
+      ]
+    );
   };
 
   return (
     <>
-    <TouchableOpacity style={containerStyle} onPress={handleOpenModal} disabled={!disponibile}>
-      <View style={styles.content}>
-        <Text style={textStyle}>{title}</Text>
-        <Text style={subtitleStyle}>{subTitle}</Text>
-      </View>
-    </TouchableOpacity>
-          <Modal visible={isModalVisible} animationType="slide">
-          <View style={styles.modalContainer}>
-            <Text style={styles.modalText}>Questa è la PiattoCustomScreen a scomparsa!</Text>
-            <Text style={styles.modalText}>{id}</Text>
-            <TouchableOpacity style={styles.modalButton} onPress={closeModal}>
-              <Text style={styles.modalButtonText}>Chiudi PiattoCustomScreen</Text>
-            </TouchableOpacity>
-          </View>
-        </Modal>
+      <TouchableOpacity style={containerStyle} onPress={handleOpenModal} disabled={!disponibile}>
+        <View style={styles.content}>
+          <Text style={textStyle}>{title}</Text>
+          <Text style={subtitleStyle}>{subTitle}</Text>
+        </View>
+      </TouchableOpacity>
+      <Modal visible={isModalVisible} animationType="slide">
+        <View style={[styles.modalContainer, { width: modalWidth }]}>
+          <TouchableOpacity style={styles.closeButton} onPress={closeModal}>
+            <Ionicons name="close" size={24} color="black" />
+          </TouchableOpacity>
+          <ListItemCondimenti info={id} />
+        </View>
+      </Modal>
     </>
   );
 };
@@ -67,7 +82,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 8,
     color: '#000',
-    textTransform: 'uppercase', // Stile di testo in maiuscolo
+    textTransform: 'uppercase',
   },
   titleClosed: {
     color: '#fff',
@@ -75,7 +90,7 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 18,
     color: '#888',
-    fontStyle: 'italic', // Stile di testo in corsivo
+    fontStyle: 'italic',
   },
   subtitleClosed: {
     color: '#fff',
@@ -86,6 +101,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
     padding: 20,
+    width: '90%',
+    alignSelf: 'center',
   },
   modalText: {
     fontSize: 20,
@@ -99,6 +116,12 @@ const styles = StyleSheet.create({
   modalButtonText: {
     color: 'white',
     fontSize: 16,
+  },
+  closeButton: {
+    position: 'absolute',
+    top: 86,
+    right: 16,
+    zIndex: 1,
   },
 });
 
