@@ -4,7 +4,6 @@ import { useNavigation } from '@react-navigation/native';
 
 const CardGnam = ({ title, image, subTitle, aperto,route,payloadRoute }) => {
   const navigation = useNavigation();
-
   const containerStyle = aperto ? styles.container : styles.containerClosed;
   const imageStyle = aperto ? styles.image : [styles.image, styles.imageClosed];
   const textStyle = aperto ? styles.title : [styles.title, styles.titleClosed];
@@ -12,7 +11,10 @@ const CardGnam = ({ title, image, subTitle, aperto,route,payloadRoute }) => {
 
   const handlePress = () => {
     if (aperto && route!=undefined) {
-      navigation.navigate(route,{data: payloadRoute}); // Cambia il nome dello screen se necessario
+      navigation.navigate('OrderClientRoot', {
+        screen: 'RestaurantsHome',
+        params: { idRest: payloadRoute },
+      });
     }
   };
 

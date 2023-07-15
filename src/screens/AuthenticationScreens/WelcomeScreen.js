@@ -99,7 +99,7 @@ const PIZZA = 'pizza'
             title={item.nome}
             subTitle={item.via}
             aperto={item.aperto}
-            route={'RestaurantsHome'}
+            route={'OrderClientRoot'}
             payloadRoute={item.id}
           />
         )}

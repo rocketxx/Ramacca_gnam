@@ -25,13 +25,24 @@ import store from '../../redux/store';
 
 const Stack = createNativeStackNavigator();
 const StackClient = createNativeStackNavigator();
+const OrderClientStack = createNativeStackNavigator();
 const BottonTabs = createBottomTabNavigator();
+
+const OrderClientRoot = () => {
+    return (
+      <OrderClientStack.Navigator initialRouteName="RestaurantsHome" screenOptions={{headerShown: true}}>
+        <OrderClientStack.Screen name="RestaurantsHome" component={RestaurantsHomeScreen} options={{headerShown: false}}/>
+        {/* PiattoCustomScreen CUSTOM VA MESSO DENTRO UNA FUNZIONE INSIEME A RestaurantsHomeScreen (PRIMO DI DEFAULT) */}
+        <OrderClientStack.Screen name="PiattoCustom" component={PiattoCustomScreen} options={{headerShown: false}} />
+      </OrderClientStack.Navigator>
+    );
+  };
 
 const ClientRoot = () => {
     return (
       <StackClient.Navigator initialRouteName="Welcome" screenOptions={{headerShown: true}}>
         <StackClient.Screen name="Welcome" component={WelcomeScreen} options={{headerShown: false}}/>
-        <StackClient.Screen name="RestaurantsHome" component={RestaurantsHomeScreen} options={{title : 'Ristorante'}}/>
+        <StackClient.Screen name="OrderClientRoot" component={OrderClientRoot} options={{title : 'Ristorante'}}/>
         {/* PiattoCustomScreen CUSTOM VA MESSO DENTRO UNA FUNZIONE INSIEME A RestaurantsHomeScreen (PRIMO DI DEFAULT) */}
         {/* <StackClient.Screen name="PiattoCustom" component={PiattoCustomScreen} screenOptions={{headerShown: true}} /> */}
       </StackClient.Navigator>
