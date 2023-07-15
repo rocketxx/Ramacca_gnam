@@ -1,15 +1,22 @@
-import React, { useState } from 'react';
+import { useNavigation } from '@react-navigation/core';
+import React, { useEffect, useState } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, Modal } from 'react-native';
 
-const Finestra = ({ item, openModal }) => {
+function PiattoCustomScreen ({ item }) {
   const [isModalVisible, setModalVisible] = useState(false);
+
+  const navigation = useNavigation();
+  useEffect(() => {
+    handleOpenModal();
+  }, []);
 
   const handleOpenModal = () => {
     setModalVisible(true);
-    if (openModal) {
-      openModal();
-    }
+      // openModal();
+      navigation.goBack();
   };
+
+
 
   const closeModal = () => {
     setModalVisible(false);
@@ -18,15 +25,15 @@ const Finestra = ({ item, openModal }) => {
   return (
     <View style={styles.container}>
       {/* <TouchableOpacity style={styles.button} onPress={handleOpenModal}>
-        <Text style={styles.buttonText}>Apri Finestra</Text>
+        <Text style={styles.buttonText}>Apri PiattoCustomScreen</Text>
       </TouchableOpacity> */}
 
       <Modal visible={isModalVisible} animationType="slide">
         <View style={styles.modalContainer}>
-          <Text style={styles.modalText}>Questa è la finestra a scomparsa!</Text>
+          <Text style={styles.modalText}>Questa è la PiattoCustomScreen a scomparsa!</Text>
           <Text style={styles.modalText}>{item}</Text>
           <TouchableOpacity style={styles.modalButton} onPress={closeModal}>
-            <Text style={styles.modalButtonText}>Chiudi Finestra</Text>
+            <Text style={styles.modalButtonText}>Chiudi PiattoCustomScreen</Text>
           </TouchableOpacity>
         </View>
       </Modal>
@@ -71,4 +78,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Finestra;
+export default PiattoCustomScreen;
