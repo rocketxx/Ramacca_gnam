@@ -31,29 +31,42 @@ const ListItemCondimenti = ({ info }) => {
 
     // Dati di mock
     const mockData = [
-        { id: 1, title: 'Condimento 1', description: 'Descrizione del condimento 1' },
-        { id: 2, title: 'Condimento 2', description: 'Descrizione del condimento 2' },
-        { id: 3, title: 'Condimento 3', description: 'Descrizione del condimento 3' },
+        { id: 1, title: 'Condimento 1', description: 'Descrizione del condimento 1', category: 'Categoria 1' },
+        { id: 2, title: 'Condimento 2', description: 'Descrizione del condimento 2', category: 'Categoria 1' },
+        { id: 3, title: 'Condimento 3', description: 'Descrizione del condimento 3', category: 'Categoria 2' },
     ];
+
+    // Funzione per ottenere un array unico di categorie
+    const getUniqueCategories = () => {
+        const categories = mockData.map((item) => item.category);
+        return [...new Set(categories)];
+    };
 
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView style={styles.scrollView}>
-                <Text style={styles.title}>Lista Condimenti: {info}</Text>
-                {mockData.map((item) => (
-                    <TouchableOpacity
-                        key={item.id}
-                        style={[
-                            styles.itemContainer,
-                            selectedItems.some((selectedItem) => selectedItem.id === item.id) && styles.selectedItem,
-                        ]}
-                        onPress={() => handleItemPress(item)}
-                    >
-                        <View style={styles.itemContent}>
-                            <Text style={styles.itemTitle}>{item.title}</Text>
-                            <Text style={styles.itemDescription}>{item.description}</Text>
-                        </View>
-                    </TouchableOpacity>
+                {getUniqueCategories().map((category) => (
+                    <View key={category}>
+                        <Text style={styles.categoryTitle}>{category}</Text>
+                        {mockData
+                            .filter((item) => item.category === category)
+                            .map((item) => (
+                                <TouchableOpacity
+                                    key={item.id}
+                                    style={[
+                                        styles.itemContainer,
+                                        selectedItems.some((selectedItem) => selectedItem.id === item.id) &&
+                                            styles.selectedItem,
+                                    ]}
+                                    onPress={() => handleItemPress(item)}
+                                >
+                                    <View style={styles.itemContent}>
+                                        <Text style={styles.itemTitle}>{item.title}</Text>
+                                        <Text style={styles.itemDescription}>{item.description}</Text>
+                                    </View>
+                                </TouchableOpacity>
+                            ))}
+                    </View>
                 ))}
             </ScrollView>
             <View style={styles.footer}>
@@ -63,6 +76,7 @@ const ListItemCondimenti = ({ info }) => {
                         <Button onPress={handlePrintSelection}>
                             Aggiungi All'Ordine
                         </Button>
+                        <Text></Text>
                         <QuantityCounter id={30}></QuantityCounter>
                     </>
                 )}
@@ -81,8 +95,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         paddingTop: 150,
     },
-    title: {
-        fontSize: 20,
+    categoryTitle: {
+        fontSize: 24,
         fontWeight: 'bold',
         marginBottom: 16,
     },
@@ -114,11 +128,10 @@ const styles = StyleSheet.create({
         bottom: 0,
         left: 0,
         right: 0,
-        flexDirection:'column-reverse',
+        flexDirection: 'column-reverse',
         alignItems: 'center',
-        justifyContent: 'space-between',
         paddingHorizontal: 16,
-        paddingVertical: 16,
+        paddingVertical: 36,
         backgroundColor: 'white',
         borderTopWidth: 1,
         borderTopColor: '#ccc',
