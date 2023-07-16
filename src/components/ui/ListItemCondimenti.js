@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
     scrollView: {
         flex: 1,
         paddingHorizontal: 16,
+        // alignSelf: 'center',  //commenta questo e vedi
         paddingTop: 0,
     },
     categoryTitle: {
