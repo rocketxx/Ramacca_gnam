@@ -34,6 +34,14 @@ const ListItemCondimenti = ({ info }) => {
         { id: 1, title: 'Condimento 1', description: 'Descrizione del condimento 1', category: 'Categoria 1' },
         { id: 2, title: 'Condimento 2', description: 'Descrizione del condimento 2', category: 'Categoria 1' },
         { id: 3, title: 'Condimento 3', description: 'Descrizione del condimento 3', category: 'Categoria 2' },
+        { id: 4, title: 'Condimento 4', description: 'Descrizione del condimento 4', category: 'Categoria 2' },
+        { id: 5, title: 'Condimento 4', description: 'Descrizione del condimento 4', category: 'Categoria 2' },
+        { id: 6, title: 'Condimento 4', description: 'Descrizione del condimento 4', category: 'Categoria 2' },
+        { id: 7, title: 'Condimento 4', description: 'Descrizione del condimento 4', category: 'Categoria 2' },
+        { id: 8, title: 'Condimento 4', description: 'Descrizione del condimento 4', category: 'Categoria 3' },
+        { id: 9, title: 'Condimento 4', description: 'Descrizione del condimento 4', category: 'Categoria 3' },
+        { id: 10, title: 'Condimento 4', description: 'Descrizione del condimento 4', category: 'Categoria 3' },
+        { id: 11, title: 'Condimento 4', description: 'Descrizione del condimento 4', category: 'Categoria 3' },
     ];
 
     // Funzione per ottenere un array unico di categorie
@@ -81,7 +89,7 @@ const ListItemCondimenti = ({ info }) => {
                     </>
                 )}
             </View>
-        </SafeAreaView>
+            </SafeAreaView>
     );
 };
 
@@ -93,7 +101,7 @@ const styles = StyleSheet.create({
     scrollView: {
         flex: 1,
         paddingHorizontal: 16,
-        paddingTop: 150,
+        paddingTop: 0,
     },
     categoryTitle: {
         fontSize: 24,
@@ -129,9 +137,9 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         flexDirection: 'column-reverse',
-        alignItems: 'center',
+        // alignItems: 'center',
         paddingHorizontal: 16,
-        paddingVertical: 36,
+        paddingVertical: 25,
         backgroundColor: 'white',
         borderTopWidth: 1,
         borderTopColor: '#ccc',

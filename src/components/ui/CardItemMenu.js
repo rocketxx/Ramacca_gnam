@@ -48,7 +48,7 @@ const CardItemMenu = ({ id, title, subTitle, disponibile, myroute }) => {
           <Text style={subtitleStyle}>{subTitle}</Text>
         </View>
       </TouchableOpacity>
-      <Modal visible={isModalVisible} animationType="slide">
+      <Modal visible={isModalVisible} animationType= "slide">
         <View style={[styles.modalContainer, { width: modalWidth }]}>
           <TouchableOpacity style={styles.closeButton} onPress={closeModal}>
             <Ionicons name="close" size={24} color="black" />
@@ -97,31 +97,23 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: 'white',
-    padding: 20,
-    width: '90%',
-    alignSelf: 'center',
+    paddingTop: 66, // Aggiungi padding top per lasciare spazio al tasto di chiusura
   },
-  modalText: {
-    fontSize: 20,
-    marginBottom: 20,
-  },
-  modalButton: {
-    padding: 10,
-    backgroundColor: 'blue',
-    borderRadius: 5,
-  },
-  modalButtonText: {
-    color: 'white',
-    fontSize: 16,
-  },
-  closeButton: {
+  modalCloseButton: {
     position: 'absolute',
-    top: 86,
-    right: 16,
+    top: -16, // Sposta il tasto di chiusura verso l'alto di 16 punti
+    right: -16,
     zIndex: 1,
+  },
+  hiddenArea: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    zIndex: 2, // Assicurati che l'area nascosta sia sopra gli elementi
+    backgroundColor: 'white', 
   },
 });
 
