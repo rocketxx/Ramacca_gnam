@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, TouchableOpacity, Image, Text, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { setRestaurantData } from '../../redux/restaurantActions';
 
 const CardGnam = ({ title, image, subTitle, aperto,route,payloadRoute }) => {
   const navigation = useNavigation();
@@ -8,13 +10,16 @@ const CardGnam = ({ title, image, subTitle, aperto,route,payloadRoute }) => {
   const imageStyle = aperto ? styles.image : [styles.image, styles.imageClosed];
   const textStyle = aperto ? styles.title : [styles.title, styles.titleClosed];
   const subtitleStyle = aperto ? styles.subtitle : [styles.subtitle, styles.subtitleClosed];
-
+  const dispatch = useDispatch();
   const handlePress = () => {
     if (aperto && route!=undefined) {
-      navigation.navigate('OrderClientRoot', {
+      navigation.navigate('OrderClientRoot', {  
         screen: 'RestaurantsHome',
         params: { idRest: payloadRoute },
       });
+
+      //memorizza ristorante cliccato id: payloadRoute
+      dispatch(setRestaurantData(payloadRoute, title));
     }
   };
 

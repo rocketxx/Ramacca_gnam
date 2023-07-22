@@ -10,7 +10,8 @@ import { ReadAllDocumentByCollection, WriteByCollectionAndId, getByCollectionAnd
 
 function WelcomeAdminScreen() {
   const [userInfo, setUserInfo] = useState({})
-
+  // const newItem = new MenuItem(1, 1, 2, [ingredient1, ingredient2]);
+  // const tmp = nre Order
   useEffect(() => {
     const func = async () => {
       await getUserInfo().then((res) => {

@@ -50,8 +50,8 @@ const CartScreen = () => {
     {
       console.log(counters)
     }
+    // const { id, title } = useSelector((state) => state.restaurant); //leggi dati ristorante
   return (
-
     <View style={styles.container}>
       <Text style={styles.title}>Dati Salvati</Text>
       {/* {data.map((item) => (
@@ -60,6 +60,8 @@ const CartScreen = () => {
           <Text>{userInfo?.email}</Text>
         </View>
       ))} */}
+
+      {/* RICORDATI DI SVUOTARE LO STORE DOPO L'INVIO DELL'ORDINE */}
       <Button onPress={test}>TEST</Button>
     </View>
   );

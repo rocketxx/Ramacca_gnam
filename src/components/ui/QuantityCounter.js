@@ -5,20 +5,21 @@ import { updateQuantity } from '../../redux/actions';
 import { formToJSON } from 'axios';
 
 const QuantityCounter = ({ id }) => {
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
+  
   //indicando state.counters sto indicando di usare il reducers counters. ci sono altri reducers oltre counters volendo
   const counters = useSelector(state => state.counters);
 
   const handleIncrement = () => {
-    setQuantity(quantity + 1);
+    setQuantity((quantity+1));
     dispatch(updateQuantity(id, quantity));
     leggiCounterCorretto(counters);
   };
 
   const handleDecrement = () => {
     if (quantity > 0) {
-      setQuantity(quantity - 1);
+      setQuantity((quantity-1));
       dispatch(updateQuantity(id, quantity));
     }
   };

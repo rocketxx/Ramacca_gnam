@@ -42,18 +42,22 @@ const DB = firebase.firestore();
 //       }
 //       func();
 //     }, [])
-
+function getIdCollection(collectionName)
+{
+  //var id = DB.collection(collectionName).document().getId();
+// // db.collection("collection_name").document(id).set(object);
+}
 export function WriteByCollectionAndId(collection, id, objectToUpload) {
   return new Promise((resolve, reject) => {
     DB.collection(collection)
       .doc(id)
       .set(objectToUpload)
       .then(() => {
-        console.log("[A1] Documento caricato correttamente!");
+        console.log("[WriteByCollectionAndId] Documento caricato correttamente!");
         resolve();
       })
       .catch((error) => {
-        console.error("[A1] Errore nella scrittura del documento: ", error);
+        console.error("[WriteByCollectionAndId] Errore nella scrittura del documento: ", error);
         reject(error);
       });
   });
@@ -65,11 +69,11 @@ export function WriteByCollectionAndWhere(collection, fieldName, operator, value
       .where(fieldName, operator, value)
       .set(objectToUpload)
       .then(() => {
-        console.log("[A1] Documento caricato correttamente!");
+        console.log("[WriteByCollectionAndWhere] Documento caricato correttamente!");
         resolve();
       })
       .catch((error) => {
-        console.error("[A1] Errore nella scrittura del documento: ", error);
+        console.error("[WriteByCollectionAndWhere] Errore nella scrittura del documento: ", error);
         reject(error);
       });
   });
@@ -86,12 +90,12 @@ export function getByCollectionAndId(collection, id) {
           // console.log("Document data:", doc.data());
           resolve(doc.data());
         } else {
-          console.log("[B1] Nessun documento trovato");
+          console.log("[getByCollectionAndId] Nessun documento trovato");
           resolve(null);
         }
       })
       .catch((error) => {
-        console.log("[B1] Errore lettura documento: ", error);
+        console.log("[getByCollectionAndId] Errore lettura documento: ", error);
         reject(error);
       });
   });
@@ -170,82 +174,171 @@ export function ReadAllDocumentByCollection(collection) {
         resolve(documents);
       })
       .catch((error) => {
-        console.error("Errore nella lettura dei documenti: ", error);
+        console.error("[ReadAllDocumentByCollection]:Errore nella lettura dei documenti: ", error);
         reject(error);
       });
   });
 }
 
 export function loadDataMenuToFirebase() {
-  const menu = [
+  const base = [
     {
+      "tipologia": "pizza",
       "idRistorante": "SdzyMTebBh7N81q50DVU",
-      "nome": "Menu 1",
+      "nome": "base 1 pizza",
       "ingredienti": ["Ingrediente 1", "Ingrediente 2", "Ingrediente 3"],
-      "descrizione": "Descrizione del menu 1",
+      "descrizione": "Descrizione del base 1",
       "disponibile": "false"
     },
     {
+      "tipologia": "pizza",
       "idRistorante": "SdzyMTebBh7N81q50DVU",
-      "nome": "Menu 2",
+      "nome": "base 2 pizza",
       "ingredienti": ["Ingrediente 1", "Ingrediente 2", "Ingrediente 3"],
-      "descrizione": "Descrizione del menu 1",
+      "descrizione": "Descrizione del base 1",
       "disponibile": "true"
     },
     
     {
+      "tipologia": "panino",
       "idRistorante": "SdzyMTebBh7N81q50DVU",
-      "nome": "Menu 3",
+      "nome": "base 3",
       "ingredienti": ["Ingrediente 1", "Ingrediente 2", "Ingrediente 3"],
-      "descrizione": "Descrizione del menu 1",
+      "descrizione": "Descrizione del base 1",
       "disponibile": "true"
     },
     {
+      "tipologia": "panino",
       "idRistorante": "SdzyMTebBh7N81q50DVU",
-      "nome": "Menu 4",
+      "nome": "base 4",
       "ingredienti": ["Ingrediente 1", "Ingrediente 2", "Ingrediente 3"],
-      "descrizione": "Descrizione del menu 1",
+      "descrizione": "Descrizione del base 1",
       "disponibile": "true"
     },
     {
+      "tipologia": "panino",
       "idRistorante": "miJ5a5915WZb2RcjApfa",
-      "nome": "Menu 4",
+      "nome": "base 4",
       "ingredienti": ["Ingrediente 1", "Ingrediente 2", "Ingrediente 3"],
-      "descrizione": "Descrizione del menu 1",
+      "descrizione": "Descrizione del base 1",
       "disponibile": "true"
     },
     {
+      "tipologia": "panino",
       "idRistorante": "miJ5a5915WZb2RcjApfa",
-      "nome": "Menu 3",
+      "nome": "base 3",
       "ingredienti": ["Ingrediente 1", "Ingrediente 2", "Ingrediente 3"],
-      "descrizione": "Descrizione del menu 1",
+      "descrizione": "Descrizione del base 1",
       "disponibile": "true"
     },
     {
+      "tipologia": "panino",
       "idRistorante": "miJ5a5915WZb2RcjApfa",
-      "nome": "Menu 2",
+      "nome": "base 2",
       "ingredienti": ["Ingrediente 1", "Ingrediente 2", "Ingrediente 3"],
-      "descrizione": "Descrizione del menu 1",
+      "descrizione": "Descrizione del base 1",
       "disponibile": "true"
     },
     {
+      "tipologia": "panino",
       "idRistorante": "miJ5a5915WZb2RcjApfa",
-      "nome": "Menu 1",
+      "nome": "base 1",
       "ingredienti": ["Ingrediente 1", "Ingrediente 2", "Ingrediente 3"],
-      "descrizione": "Descrizione del menu 1",
+      "descrizione": "Descrizione del base 1",
       "disponibile": "true"
     }
 
   ];
 
   // Aggiungi i ristoranti a Firebase Firestore
-  menu.forEach((menu) => {
-    DB.collection("menu").add(menu)
+  base.forEach((base) => {
+    DB.collection("base").add(base)
       .then((docRef) => {
-        console.log("menu aggiunto con ID:", docRef.id);
+        console.log("base aggiunto con ID:", docRef.id);
       })
       .catch((error) => {
-        console.error("Errore durante l'aggiunta del menu:", error);
+        console.error("[loadDatabaseToFirebase]:Errore durante l'aggiunta dei base:", error);
+      });
+  });
+}
+export function loadDataIngredientiToFirebase() {
+  const ingredienti = [
+    {
+      "category": 1,
+      "tipologia": "pizza",
+      "idRistorante": "SdzyMTebBh7N81q50DVU",
+      "title": "ingrediente 1 pizza",
+      "description": "description del ingrediente 1",
+      "disponibile": "true"
+    },
+    {
+      "category": 1,
+      "tipologia": "pizza",
+      "idRistorante": "SdzyMTebBh7N81q50DVU",
+      "title": "ingrediente 2 pizza",
+      "description": "description del ingrediente 1",
+      "disponibile": "true"
+    },
+    
+    {
+      "category": 2,
+      "tipologia": "panino",
+      "idRistorante": "SdzyMTebBh7N81q50DVU",
+      "title": "ingrediente 3",
+      "description": "description del ingrediente 1",
+      "disponibile": "true"
+    },
+    {
+      "category": 2,
+      "tipologia": "panino",
+      "idRistorante": "SdzyMTebBh7N81q50DVU",
+      "title": "ingrediente 4",
+      "description": "description del ingrediente 1",
+      "disponibile": "true"
+    },
+    {
+      "category": 2,
+      "tipologia": "panino",
+      "idRistorante": "miJ5a5915WZb2RcjApfa",
+      "title": "ingrediente 4",
+      "description": "description del ingrediente 1",
+      "disponibile": "true"
+    },
+    {
+      "category": 3,
+      "tipologia": "panino",
+      "idRistorante": "miJ5a5915WZb2RcjApfa",
+      "title": "ingrediente 3",
+      "description": "description del ingrediente 1",
+      "disponibile": "true"
+    },
+    {
+      "category": 3,
+      "tipologia": "panino",
+      "idRistorante": "miJ5a5915WZb2RcjApfa",
+      "title": "ingrediente 2",
+      "description": "description del ingrediente 1",
+      "disponibile": "true"
+    },
+    {
+      "category": 3,
+      "tipologia": "panino",
+      "idRistorante": "miJ5a5915WZb2RcjApfa",
+      "title": "ingrediente 1",
+      "description": "description del ingrediente 1",
+      "disponibile": "true"
+    }
+
+  ];
+
+  // Aggiungi i ristoranti a Firebase Firestore
+  ingredienti.forEach((ingredienti) => {
+    DB.collection("ingredienti").add(ingredienti)
+      .then((docRef) => {
+        console.log("base aggiunto con ID:", docRef.id);
+      })
+      .catch((error) => {
+        console.error("[loadDataingredientiToFirebase]:Errore durante l'aggiunta dei base:", error);
       });
   });
 }
@@ -339,7 +432,7 @@ export function loadDataToFirebase() {
         console.log("Ristorante aggiunto con ID:", docRef.id);
       })
       .catch((error) => {
-        console.error("Errore durante l'aggiunta del ristorante:", error);
+        console.error("[loadDataToFirebase]:Errore durante l'aggiunta del ristorante:", error);
       });
   });
 }

@@ -31,10 +31,10 @@ const CardItemMenu = ({ id, title, subTitle, disponibile, myroute }) => {
 
   const closeModal = () => {
     Alert.alert(
-      'Conferma',
+      'Conferma',//cancella lo store
       'Sei sicuro di voler chiudere? Perderai i dati inseriti.',
       [
-        { text: 'Annulla', style: 'cancel' },
+        { text: 'Annulla', style: 'cancel' }, 
         { text: 'Chiudi', style: 'destructive', onPress: () => setModalVisible(false) },
       ]
     );
